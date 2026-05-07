@@ -1,0 +1,52 @@
+<table border="1">
+
+    <thead>
+        <tr>
+            <th>Título</th>
+            <th>Fecha</th>
+            <th>Ubicación</th>
+            <th>Aforo</th>
+            <th>Plazas disponibles</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+        {% for evento in eventos %}
+
+        <tr>
+
+            <td>
+                <a href="{% url 'ver_evento' evento.id %}">
+                    {{ evento.titulo }}
+                </a>
+            </td>
+
+            <td>{{ evento.fecha }}</td>
+
+            <td>{{ evento.ubicacion }}</td>
+
+            <td>{{ evento.aforo_maximo }}</td>
+
+            <td>{{ evento.plazas_disponibles }}</td>
+
+            <td>
+
+                <a href="{% url 'editar_evento' evento.id %}">
+                    Editar
+                </a>
+
+                <a href="{% url 'eliminar_evento' evento.id %}">
+                    Eliminar
+                </a>
+
+            </td>
+
+        </tr>
+
+        {% endfor %}
+
+    </tbody>
+
+</table>

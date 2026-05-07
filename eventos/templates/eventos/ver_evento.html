@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Detalle Evento</title>
+</head>
+<body>
+
+<h1>{{ evento.titulo }}</h1>
+
+<p>
+    <strong>Descripción:</strong>
+    {{ evento.descripcion }}
+</p>
+
+<p>
+    <strong>Fecha:</strong>
+    {{ evento.fecha }}
+</p>
+
+<p>
+    <strong>Hora inicio:</strong>
+    {{ evento.hora_inicio }}
+</p>
+
+<p>
+    <strong>Hora fin:</strong>
+    {{ evento.hora_fin }}
+</p>
+
+<p>
+    <strong>Ubicación:</strong>
+    {{ evento.ubicacion }}
+</p>
+
+<p>
+    <strong>Aforo máximo:</strong>
+    {{ evento.aforo_maximo }}
+</p>
+
+<p>
+    <strong>Plazas disponibles:</strong>
+    {{ evento.plazas_disponibles }}
+</p>
+
+<p>
+    <strong>Estado:</strong>
+    {{ evento.estado }}
+</p>
+
+<p>
+    <strong>Categoría:</strong>
+    {{ evento.categoria.nombre }}
+</p>
+
+<a href="{% url 'listar_eventos' %}">
+    Volver
+</a>
+
+</body>
+</html>

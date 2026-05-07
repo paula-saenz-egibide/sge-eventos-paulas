@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Inscripciones</title>
+</head>
+<body>
+
+<h1>Lista de Inscripciones</h1>
+
+<table border="1">
+
+    <thead>
+        <tr>
+            <th>Código</th>
+            <th>Usuario</th>
+            <th>Evento</th>
+            <th>Fecha inscripción</th>
+            <th>Estado</th>
+            <th>Asistencia</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+        {% for inscripcion in inscripciones %}
+
+        <tr>
+            <td>{{ inscripcion.codigo_inscripcion }}</td>
+            <td>{{ inscripcion.usuario.nombre }} {{ inscripcion.usuario.apellidos }}</td>
+            <td>{{ inscripcion.evento.titulo }}</td>
+            <td>{{ inscripcion.fecha_inscripcion }}</td>
+            <td>{{ inscripcion.estado }}</td>
+            <td>{{ inscripcion.confirmacion_asistencia }}</td>
+            <td>
+                <a href="{% url 'editar_inscripcion' inscripcion.id %}">Editar</a>
+                <a href="{% url 'cancelar_inscripcion' inscripcion.id %}">Cancelar</a>
+            </td>
+        </tr>
+
+        {% endfor %}
+
+    </tbody>
+
+</table>
+
+<br>
+
+<a href="{% url 'crear_inscripcion' %}">Crear nueva inscripción</a>
+<br>
+<a href="{% url 'listar_eventos' %}">Volver a eventos</a>
+
+</body>
+</html>

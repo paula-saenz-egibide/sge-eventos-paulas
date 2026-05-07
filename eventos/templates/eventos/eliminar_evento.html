@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Eliminar Evento</title>
+</head>
+<body>
+
+<h1>Eliminar Evento</h1>
+
+<p>
+    Vas a eliminar el evento:
+    <strong>{{ evento.titulo }}</strong>
+</p>
+
+<form method="POST">
+
+    {% csrf_token %}
+
+    <button type="submit">
+        Sí, eliminar
+    </button>
+
+</form>
+
+<a href="{% url 'listar_eventos' %}">
+    Cancelar
+</a>
+
+</body>
+</html>

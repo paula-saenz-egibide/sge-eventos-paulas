@@ -124,4 +124,5 @@ urlpatterns = [
         api_lista_eventos,
         name='api_lista_eventos'
     ),
+
 ]

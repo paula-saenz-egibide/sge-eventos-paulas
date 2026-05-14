@@ -4,6 +4,10 @@ from django.core.exceptions import ValidationError
 from .models import Evento, Inscripcion, Usuario
 from .forms import EventoForm, InscripcionForm, UsuarioForm
 
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+
+from .serializers import EventoSerializer
 
 # =========================
 # CRUD EVENTOS
@@ -265,3 +269,10 @@ def eliminar_usuario(request, usuario_id):
     return render(request, 'eventos/eliminar_usuario.html', {
         'usuario': usuario
     })
+
+
+@api_view(['GET'])
+def api_lista_eventos(request):
+    eventos = Evento.objects.all().order_by('fecha')
+    serializer = EventoSerializer(eventos, many=True)
+    return Response(serializer.data)

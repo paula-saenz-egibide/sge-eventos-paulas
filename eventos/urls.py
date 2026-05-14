@@ -16,7 +16,8 @@ from .views import (
     crear_usuario,
     ver_usuario,
     editar_usuario,
-    eliminar_usuario
+    eliminar_usuario,
+    api_lista_eventos,
 )
 
 urlpatterns = [
@@ -117,5 +118,10 @@ urlpatterns = [
         'usuarios/eliminar/<int:usuario_id>/',
         eliminar_usuario,
         name='eliminar_usuario'
+    ),
+    path(
+        'api/eventos/',
+        api_lista_eventos,
+        name='api_lista_eventos'
     ),
 ]

@@ -17,7 +17,14 @@ from .views import (
     ver_usuario,
     editar_usuario,
     eliminar_usuario,
+
     api_lista_eventos,
+    api_detalle_evento,
+    api_inscripciones_evento,
+    api_lista_usuarios,
+    api_lista_categorias,
+    api_usuario_me,
+    api_cancelar_inscripcion,
 )
 
 urlpatterns = [
@@ -124,5 +131,41 @@ urlpatterns = [
         api_lista_eventos,
         name='api_lista_eventos'
     ),
+
+path(
+    'api/eventos/<int:evento_id>/',
+    api_detalle_evento,
+    name='api_detalle_evento'
+),
+
+path(
+    'api/eventos/<int:evento_id>/inscripciones/',
+    api_inscripciones_evento,
+    name='api_inscripciones_evento'
+),
+
+path(
+    'api/usuarios/',
+    api_lista_usuarios,
+    name='api_lista_usuarios'
+),
+
+path(
+    'api/categorias/',
+    api_lista_categorias,
+    name='api_lista_categorias'
+),
+
+path(
+    'api/usuarios/me/',
+    api_usuario_me,
+    name='api_usuario_me'
+),
+
+path(
+    'api/inscripciones/<int:inscripcion_id>/cancelar/',
+    api_cancelar_inscripcion,
+    name='api_cancelar_inscripcion'
+),
 
 ]

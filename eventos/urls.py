@@ -22,15 +22,17 @@ from .views import (
     api_detalle_evento,
     api_inscripciones_evento,
     api_lista_usuarios,
+    api_detalle_usuario,
     api_lista_categorias,
     api_usuario_me,
     api_cancelar_inscripcion,
+    api_toggle_asistencia_inscripcion,
 )
 
 urlpatterns = [
 
     # =========================
-    # EVENTOS
+    # EVENTOS HTML
     # =========================
 
     path(
@@ -63,9 +65,8 @@ urlpatterns = [
         name='eliminar_evento'
     ),
 
-
     # =========================
-    # INSCRIPCIONES
+    # INSCRIPCIONES HTML
     # =========================
 
     path(
@@ -92,9 +93,8 @@ urlpatterns = [
         name='cancelar_inscripcion'
     ),
 
-
     # =========================
-    # USUARIOS
+    # USUARIOS HTML
     # =========================
 
     path(
@@ -126,46 +126,74 @@ urlpatterns = [
         eliminar_usuario,
         name='eliminar_usuario'
     ),
+
+    # =========================
+    # API EVENTOS
+    # =========================
+
     path(
         'api/eventos/',
         api_lista_eventos,
         name='api_lista_eventos'
     ),
 
-path(
-    'api/eventos/<int:evento_id>/',
-    api_detalle_evento,
-    name='api_detalle_evento'
-),
+    path(
+        'api/eventos/<int:evento_id>/',
+        api_detalle_evento,
+        name='api_detalle_evento'
+    ),
 
-path(
-    'api/eventos/<int:evento_id>/inscripciones/',
-    api_inscripciones_evento,
-    name='api_inscripciones_evento'
-),
+    path(
+        'api/eventos/<int:evento_id>/inscripciones/',
+        api_inscripciones_evento,
+        name='api_inscripciones_evento'
+    ),
 
-path(
-    'api/usuarios/',
-    api_lista_usuarios,
-    name='api_lista_usuarios'
-),
+    # =========================
+    # API USUARIOS
+    # =========================
 
-path(
-    'api/categorias/',
-    api_lista_categorias,
-    name='api_lista_categorias'
-),
+    path(
+        'api/usuarios/',
+        api_lista_usuarios,
+        name='api_lista_usuarios'
+    ),
 
-path(
-    'api/usuarios/me/',
-    api_usuario_me,
-    name='api_usuario_me'
-),
+    path(
+        'api/usuarios/me/',
+        api_usuario_me,
+        name='api_usuario_me'
+    ),
 
-path(
-    'api/inscripciones/<int:inscripcion_id>/cancelar/',
-    api_cancelar_inscripcion,
-    name='api_cancelar_inscripcion'
-),
+    path(
+        'api/usuarios/<str:dni>/',
+        api_detalle_usuario,
+        name='api_detalle_usuario'
+    ),
 
+    # =========================
+    # API CATEGORÍAS
+    # =========================
+
+    path(
+        'api/categorias/',
+        api_lista_categorias,
+        name='api_lista_categorias'
+    ),
+
+    # =========================
+    # API INSCRIPCIONES
+    # =========================
+
+    path(
+        'api/inscripciones/<int:inscripcion_id>/cancelar/',
+        api_cancelar_inscripcion,
+        name='api_cancelar_inscripcion'
+    ),
+
+    path(
+        'api/inscripciones/<int:inscripcion_id>/asistencia/',
+        api_toggle_asistencia_inscripcion,
+        name='api_toggle_asistencia_inscripcion'
+    ),
 ]

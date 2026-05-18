@@ -287,8 +287,6 @@ def api_inscripciones_evento(request, evento_id):
 
         usuario_id = data.get('usuario')
 
-        # Si ya existe una inscripción cancelada para ese usuario y evento,
-        # se reactiva esa misma inscripción en vez de crear una duplicada.
         inscripcion_cancelada = Inscripcion.objects.filter(
             usuario_id=usuario_id,
             evento_id=evento_id,
@@ -321,7 +319,6 @@ def api_inscripciones_evento(request, evento_id):
                     status=status.HTTP_400_BAD_REQUEST
                 )
 
-        # Si no existe inscripción cancelada, se crea una nueva inscripción.
         serializer = InscripcionCreateUpdateSerializer(data=data)
 
         if serializer.is_valid():
@@ -349,16 +346,64 @@ def api_cancelar_inscripcion(request, inscripcion_id):
     return Response(serializer.data)
 
 
+@api_view(['PUT'])
+def api_toggle_asistencia_inscripcion(request, inscripcion_id):
+    inscripcion = Inscripcion.objects.get(id=inscripcion_id)
+
+    inscripcion.confirmacion_asistencia = not inscripcion.confirmacion_asistencia
+    inscripcion.save()
+
+    serializer = InscripcionSerializer(inscripcion)
+    return Response(serializer.data)
+
+
 # =========================
 # API USUARIOS
 # =========================
 
-@api_view(['GET'])
+@api_view(['GET', 'POST'])
 def api_lista_usuarios(request):
-    usuarios = Usuario.objects.all().order_by('apellidos', 'nombre')
-    serializer = UsuarioSerializer(usuarios, many=True)
+    if request.method == 'GET':
+        usuarios = Usuario.objects.all().order_by('apellidos', 'nombre')
+        serializer = UsuarioSerializer(usuarios, many=True)
+        return Response(serializer.data)
 
-    return Response(serializer.data)
+    if request.method == 'POST':
+        serializer = UsuarioSerializer(data=request.data)
+
+        if serializer.is_valid():
+            usuario = serializer.save()
+            return Response(
+                UsuarioSerializer(usuario).data,
+                status=status.HTTP_201_CREATED
+            )
+
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['GET', 'PUT', 'DELETE'])
+def api_detalle_usuario(request, dni):
+    usuario = Usuario.objects.get(dni=dni)
+
+    if request.method == 'GET':
+        serializer = UsuarioSerializer(usuario)
+        return Response(serializer.data)
+
+    if request.method == 'PUT':
+        serializer = UsuarioSerializer(usuario, data=request.data)
+
+        if serializer.is_valid():
+            usuario_actualizado = serializer.save()
+            return Response(UsuarioSerializer(usuario_actualizado).data)
+
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    if request.method == 'DELETE':
+        usuario.delete()
+        return Response(
+            {"mensaje": "Usuario eliminado correctamente"},
+            status=status.HTTP_204_NO_CONTENT
+        )
 
 
 # =========================

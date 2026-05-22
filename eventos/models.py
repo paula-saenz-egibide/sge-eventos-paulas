@@ -104,7 +104,6 @@ class Inscripcion(models.Model):
                 "Este usuario ya está inscrito en este evento."
             )
 
-        # Control de aforo
         if self.estado == 'CONFIRMADA':
 
             if self.evento.plazas_disponibles() <= 0:

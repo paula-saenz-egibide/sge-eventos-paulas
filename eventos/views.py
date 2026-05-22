@@ -18,9 +18,8 @@ from .serializers import (
 )
 
 
-# =========================
 # CRUD EVENTOS HTML
-# =========================
+
 
 def listar_eventos(request):
     eventos = Evento.objects.all()
@@ -83,9 +82,8 @@ def eliminar_evento(request, evento_id):
     })
 
 
-# =========================
 # CRUD INSCRIPCIONES HTML
-# =========================
+
 
 def listar_inscripciones(request):
     inscripciones = Inscripcion.objects.all()
@@ -155,9 +153,8 @@ def cancelar_inscripcion(request, inscripcion_id):
     return redirect('listar_inscripciones')
 
 
-# =========================
 # CRUD USUARIOS HTML
-# =========================
+
 
 def listar_usuarios(request):
     usuarios = Usuario.objects.all()
@@ -222,9 +219,8 @@ def eliminar_usuario(request, usuario_id):
     })
 
 
-# =========================
 # API EVENTOS
-# =========================
+
 
 @api_view(['GET', 'POST'])
 def api_lista_eventos(request):
@@ -270,9 +266,8 @@ def api_detalle_evento(request, evento_id):
         )
 
 
-# =========================
 # API INSCRIPCIONES
-# =========================
+
 
 @api_view(['GET', 'POST'])
 def api_inscripciones_evento(request, evento_id):
@@ -357,9 +352,9 @@ def api_toggle_asistencia_inscripcion(request, inscripcion_id):
     return Response(serializer.data)
 
 
-# =========================
+
 # API USUARIOS
-# =========================
+
 
 @api_view(['GET', 'POST'])
 def api_lista_usuarios(request):
@@ -406,9 +401,9 @@ def api_detalle_usuario(request, dni):
         )
 
 
-# =========================
+
 # API CATEGORÍAS
-# =========================
+
 
 @api_view(['GET'])
 def api_lista_categorias(request):
@@ -418,9 +413,9 @@ def api_lista_categorias(request):
     return Response(serializer.data)
 
 
-# =========================
+
 # API LOGIN / USUARIO ACTUAL
-# =========================
+
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])

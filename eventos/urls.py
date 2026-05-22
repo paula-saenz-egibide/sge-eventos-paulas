@@ -31,9 +31,7 @@ from .views import (
 
 urlpatterns = [
 
-    # =========================
     # EVENTOS HTML
-    # =========================
 
     path(
         'eventos/',
@@ -65,9 +63,7 @@ urlpatterns = [
         name='eliminar_evento'
     ),
 
-    # =========================
     # INSCRIPCIONES HTML
-    # =========================
 
     path(
         'inscripciones/',
@@ -93,9 +89,7 @@ urlpatterns = [
         name='cancelar_inscripcion'
     ),
 
-    # =========================
     # USUARIOS HTML
-    # =========================
 
     path(
         'usuarios/',
@@ -127,9 +121,7 @@ urlpatterns = [
         name='eliminar_usuario'
     ),
 
-    # =========================
     # API EVENTOS
-    # =========================
 
     path(
         'api/eventos/',
@@ -149,9 +141,7 @@ urlpatterns = [
         name='api_inscripciones_evento'
     ),
 
-    # =========================
     # API USUARIOS
-    # =========================
 
     path(
         'api/usuarios/',
@@ -171,9 +161,7 @@ urlpatterns = [
         name='api_detalle_usuario'
     ),
 
-    # =========================
     # API CATEGORÍAS
-    # =========================
 
     path(
         'api/categorias/',
@@ -181,9 +169,7 @@ urlpatterns = [
         name='api_lista_categorias'
     ),
 
-    # =========================
     # API INSCRIPCIONES
-    # =========================
 
     path(
         'api/inscripciones/<int:inscripcion_id>/cancelar/',
